@@ -82,6 +82,15 @@ public class arrayTest {
 	}
 	
 	
-	
+	@Test
+	public void testcountingSort() {
+		Array testcases = new Array(10000);
+		testcases.randomNumbers(5, 10);
+		int[] testtable= new int[10000];
+		testtable=testcases.getArray();
+		Arrays.sort(testtable);
+		assertArrayEquals(testtable,testcases.countingSort());
+			
+	}
 
 }

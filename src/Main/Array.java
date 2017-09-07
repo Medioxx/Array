@@ -96,17 +96,12 @@ public class Array {
         int i = low;
         int j = high;
 
-        // pivot is middle index
+        
         int pivot = this.array[low + (high - low) / 2];
 
-        // Divide into two arrays
+        
         while (i <= j) {
-            /**
-             * As shown in above image, In each iteration, we will identify a
-             * number from left side which is greater then the pivot value, and
-             * a number from right side which is less then the pivot value. Once
-             * search is complete, we can swap both numbers.
-             */
+          
             while (this.array[i] < pivot) {
                 i++;
             }
@@ -115,13 +110,11 @@ public class Array {
             }
             if (i <= j) {
                 swap(i, j);
-                // move index to next position on both sides
                 i++;
                 j--;
             }
         }
 
-        // calls quickSort() method recursively
         if (low < j) {
             quicksort(low, j);
         }
@@ -140,8 +133,43 @@ public class Array {
 	}
 	
 	
-	
+	public int[] countingSort() 
+	{
+		int max=this.array[0];
+		int	min=this.array[0];
+		
+		for(int i=0;i<this.array.length;i++) 
+		{	
+			if(this.array[i]>max)
+				max=this.array[i];
+			
+			if(this.array[i]<min)
+				min=this.array[i];
+		}
+		
+		int[] counts = new int[max - min + 1];
+		
+		for (int i = 0;  i < array.length; i++) {
+		      counts[array[i] - min]++;
+		 }
+		
+		 counts[0]--;
+	    
+		for (int i = 1; i < counts.length; i++) {
+	      counts[i] = counts[i] + counts[i-1];
+	    }
+	    
+	    int[] output= new int[this.array.length];
+	    
+	    
+	    for (int i = this.array.length - 1; i >= 0; i--) {
+	        output[counts[this.array[i] - min]--] = this.array[i];
+	    }
+		this.array=output;
+		return this.array;
+	}
 
+	
 
 
 
